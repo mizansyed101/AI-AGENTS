@@ -36,6 +36,10 @@ async def create_plan(request: PlanRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/api/health")
+async def health_check():
+    return {"status": "healthy", "provider_key_set": bool(os.environ.get("GEMINI_API_KEY"))}
+
 # Mount static files for the frontend
 app.mount("/", StaticFiles(directory="static", html=True), name="static")
 

@@ -26,12 +26,10 @@ def generate_financial_plan(provider: str, api_key: str, financial_goals: str, c
         """
         ),
         instructions=[
-            "Given a user's financial goals and current financial situation, generate a personalized financial plan that includes suggested budgets, investment plans, and savings strategies.",
-            "Ensure the plan is well-structured and informative.",
-            "Ensure you provide a nuanced and balanced plan.",
-            "CRITICAL: The output MUST be formatted as a single, comprehensive Markdown table. Use columns such as Category, Strategy/Action, Estimated Amount/Percentage, and Timeline/Notes.",
-            "Do NOT include any paragraphs of text outside the table. The entire response should be the Markdown table.",
-            "Never make up facts or plagiarize."
+            "Generate a personalized financial plan with suggested budgets and investment strategies.",
+            "CRITICAL: The output MUST be ONLY a single Markdown table (Category, Strategy, Amount, Timeline).",
+            "Do NOT include any text outside the table.",
+            "Keep the plan concise to ensure fast generation."
         ],
         add_datetime_to_context=True,
     )

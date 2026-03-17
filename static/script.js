@@ -32,7 +32,16 @@ document.getElementById('finance-form').addEventListener('submit', async (e) => 
             })
         });
 
-        const data = await response.json();
+        const contentType = response.headers.get("content-type");
+        let data;
+        
+        if (contentType && contentType.includes("application/json")) {
+            data = await response.json();
+        } else {
+            const rawText = await response.text();
+            console.error("Non-JSON response received:", rawText);
+            throw new Error(`Server returned non-JSON response: ${rawText.substring(0, 100)}...`);
+        }
 
         if (!response.ok) {
             throw new Error(data.detail || "An error occurred while generating the plan.");
