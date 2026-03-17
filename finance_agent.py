@@ -7,7 +7,7 @@ from agno.models.groq import Groq
 
 def generate_financial_plan(provider: str, api_key: str, financial_goals: str, current_situation: str) -> str:
     if provider.lower() == "gemini":
-        model = Gemini(id="gemini-2.0-flash", api_key=api_key)
+        model = Gemini(id="gemini-1.5-flash", api_key=api_key)
     elif provider.lower() == "openai":
         model = OpenAIChat(id="gpt-4o", api_key=api_key)
     elif provider.lower() == "groq":
@@ -16,22 +16,13 @@ def generate_financial_plan(provider: str, api_key: str, financial_goals: str, c
         raise ValueError(f"Unsupported provider: {provider}")
 
     planner = Agent(
-        name="Planner",
-        role="Generates a personalized financial plan based on user preferences",
         model=model,
-        description=dedent(
-            """\
-        You are a senior financial planner. Given a user's financial goals and current financial situation,
-        your goal is to generate a personalized financial plan that meets the user's needs and preferences.
-        """
-        ),
         instructions=[
             "Generate a personalized financial plan with suggested budgets and investment strategies.",
             "CRITICAL: The output MUST be ONLY a single Markdown table (Category, Strategy, Amount, Timeline).",
             "Do NOT include any text outside the table.",
             "Keep the plan concise to ensure fast generation."
         ],
-        add_datetime_to_context=True,
     )
 
     # Run the planner with the gathered context
