@@ -69,3 +69,38 @@ document.getElementById('export-btn').addEventListener('click', () => {
     // Export the workbook to an Excel file
     XLSX.writeFile(wb, 'AI_Financial_Plan.xlsx');
 });
+
+// Dynamic API Key Link Logic
+const providerUrls = {
+    'gemini': {
+        name: 'Google AI Studio',
+        url: 'https://aistudio.google.com/app/apikey'
+    },
+    'openai': {
+        name: 'OpenAI Dashboard',
+        url: 'https://platform.openai.com/api-keys'
+    },
+    'groq': {
+        name: 'Groq Cloud',
+        url: 'https://console.groq.com/keys'
+    }
+};
+
+const providerSelect = document.getElementById('provider');
+const apiKeyHelper = document.getElementById('api-key-helper');
+
+function updateApiKeyLink() {
+    const selected = providerSelect.value;
+    const info = providerUrls[selected];
+    if (info) {
+        apiKeyHelper.innerHTML = `<a href="${info.url}" target="_blank" rel="noopener noreferrer">Get your ${info.name} API Key</a>`;
+    } else {
+        apiKeyHelper.innerHTML = '';
+    }
+}
+
+// Listen for changes
+providerSelect.addEventListener('change', updateApiKeyLink);
+
+// Initialize on load
+updateApiKeyLink();
