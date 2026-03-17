@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Personal Finance Planner 💰</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    
+    <div class="container glass">
+        <header>
+            <h1>AI Personal Finance Planner <span class="emoji">💰</span></h1>
+            <p>Manage your finances with AI Personal Finance Manager by creating personalized budgets, investment plans, and savings strategies.</p>
+        </header>
+
+        <form id="finance-form">
+            <div class="form-section">
+                <h3><i class="icon">🎯</i> Financial Details</h3>
+                <div class="input-group">
+                    <label for="financial_goals">What are your financial goals?</label>
+                    <input type="text" id="financial_goals" placeholder="e.g. Save for a house, invest $500 monthly..." required>
+                </div>
+                <div class="input-group">
+                    <label for="current_situation">Describe your current financial situation</label>
+                    <textarea id="current_situation" rows="4" placeholder="e.g. Earning $5k/mo, $10k in savings, no debt..." required></textarea>
+                </div>
+            </div>
+
+            <button type="submit" id="submit-btn">
+                <span class="btn-text">Generate Financial Plan</span>
+                <div class="spinner hidden" id="spinner"></div>
+            </button>
+        </form>
+
+        <div id="results" class="hidden">
+            <div class="results-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="margin-bottom: 0;">Your AI Strategy</h2>
+                <button id="export-btn" class="secondary-btn" style="width: auto; padding: 0.5rem 1rem; font-size: 0.9rem; background: rgba(59, 130, 246, 0.2); border: 1px solid var(--primary);">
+                    📥 Export to Excel
+                </button>
+            </div>
+            <div id="markdown-content" class="markdown-body"></div>
+        </div>
+    </div>
+
+    <!-- For markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- SheetJS for Excel Export -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
