@@ -14,15 +14,21 @@ GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 class PlanRequest(BaseModel):
     financial_goals: str
     current_situation: str
+    provider: str
+    api_key: str
 
 @app.post("/api/plan")
 async def create_plan(request: PlanRequest):
     if not request.financial_goals or not request.current_situation:
         raise HTTPException(status_code=400, detail="Financial goals and situation are required.")
+    
+    if not request.api_key:
+        raise HTTPException(status_code=400, detail="API Key is required.")
         
     try:
         plan = generate_financial_plan(
-            gemini_api_key=GEMINI_API_KEY,
+            provider=request.provider,
+            api_key=request.api_key,
             financial_goals=request.financial_goals,
             current_situation=request.current_situation
         )

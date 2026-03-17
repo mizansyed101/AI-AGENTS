@@ -3,6 +3,8 @@ document.getElementById('finance-form').addEventListener('submit', async (e) => 
 
     const goals = document.getElementById('financial_goals').value.trim();
     const situation = document.getElementById('current_situation').value.trim();
+    const provider = document.getElementById('provider').value;
+    const apiKey = document.getElementById('api_key').value.trim();
 
     const btn = document.getElementById('submit-btn');
     const spinner = document.getElementById('spinner');
@@ -24,7 +26,9 @@ document.getElementById('finance-form').addEventListener('submit', async (e) => 
             },
             body: JSON.stringify({
                 financial_goals: goals,
-                current_situation: situation
+                current_situation: situation,
+                provider: provider,
+                api_key: apiKey
             })
         });
 

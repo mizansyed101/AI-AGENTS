@@ -2,12 +2,23 @@ from textwrap import dedent
 from agno.agent import Agent
 from agno.run.agent import RunOutput
 from agno.models.google import Gemini
+from agno.models.openai import OpenAIChat
+from agno.models.groq import Groq
 
-def generate_financial_plan(gemini_api_key: str, financial_goals: str, current_situation: str) -> str:
+def generate_financial_plan(provider: str, api_key: str, financial_goals: str, current_situation: str) -> str:
+    if provider.lower() == "gemini":
+        model = Gemini(id="gemini-2.0-flash", api_key=api_key)
+    elif provider.lower() == "openai":
+        model = OpenAIChat(id="gpt-4o", api_key=api_key)
+    elif provider.lower() == "groq":
+        model = Groq(id="llama-3.3-70b-specdec", api_key=api_key)
+    else:
+        raise ValueError(f"Unsupported provider: {provider}")
+
     planner = Agent(
         name="Planner",
         role="Generates a personalized financial plan based on user preferences",
-        model=Gemini(id="gemini-2.5-flash", api_key=gemini_api_key),
+        model=model,
         description=dedent(
             """\
         You are a senior financial planner. Given a user's financial goals and current financial situation,

@@ -31,6 +31,25 @@
                 </div>
             </div>
 
+            <div class="form-section">
+                <h3><i class="icon">⚙️</i> Model Settings</h3>
+                <div class="grid-2">
+                    <div class="input-group">
+                        <label for="provider">LLM Provider</label>
+                        <select id="provider" required>
+                            <option value="gemini" selected>Google Gemini</option>
+                            <option value="openai">OpenAI (GPT-4o)</option>
+                            <option value="groq">Groq (Llama 3)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="api_key">API Key</label>
+                        <input type="password" id="api_key" placeholder="Enter your API key..." required autocomplete="off">
+                    </div>
+                </div>
+                <p class="security-note"><i class="icon">🔒</i> Your API keys are processed locally on the server and <strong>never stored</strong> in the browser or database.</p>
+            </div>
+
             <button type="submit" id="submit-btn">
                 <span class="btn-text">Generate Financial Plan</span>
                 <div class="spinner hidden" id="spinner"></div>
