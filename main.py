@@ -8,8 +8,8 @@ import uvicorn
 
 app = FastAPI(title="AI Personal Finance Planner")
 
-# NOTE: Replace 'YOUR_GEMINI_API_KEY' with your actual Gemini API key
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyD3iDyf56MIzgoL2_TP9WWtPblrxFtrA6w")
+# NOTE: Ensure 'GEMINI_API_KEY' is set in your environment variables.
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 
 class PlanRequest(BaseModel):
     financial_goals: str
